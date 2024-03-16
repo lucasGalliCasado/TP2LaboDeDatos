@@ -21,8 +21,12 @@ from sklearn.preprocessing import StandardScaler
 from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
 from scipy.spatial.distance import pdist
 #%%
-    #Carga de datos
+#Carga de datos
 datos = pd.read_csv("sign_mnist_train.csv")
+
+#Seteamos la semilla
+np.random.seed(457)
+
 
 #%%
 #Funciones
