@@ -552,7 +552,6 @@ plt.show()
 
 #%%##############################################################################################################################
 #3c.
-
 # lista que contiene el score de cada modelo segun cross validation
 k_fold_scores = [cross_val_score(tree, X_train, y_train, cv=4) for tree in trees]
 # se queda con la media del score de los folds
@@ -570,25 +569,23 @@ plt.show()
 
 #%%##############################################################################################################################
 #3d.
-
 conf_mat = []
 for tree in trees:
-    #labels 0, 4, 8, 14, 20 corresponden a, e, i, o, u respectivamente
+    # labels 0, 4, 8, 14, 20 corresponden a, e, i, o, u respectivamente
     conf_mat.append(confusion_matrix(y_test, tree.predict(X_test), labels=[0, 4, 8, 14, 20]))
 
-#gráfico matrices de confusión
+# gráfico matrices de confusión
 fig, axs = plt.subplots(1, 5, figsize=(12, 6))
 fig.suptitle('Matriz de confusión por profundidad', fontsize=20)
 for i in range(len(conf_mat)):
     axs[i].imshow(conf_mat[i])
-    axs[i].set_title('Profundidad ' + str(i+1))
-    axs[i].set_xticks([i for i in range(0, 5)], labels=['a', 'e', 'i', 'o', 'u'])
-    axs[i].set_yticks([i for i in range(0, 5)], labels=['a', 'e', 'i', 'o', 'u'])
+    axs[i].set_title('Profundidad ' + str(i + 1))
+    axs[i].set_xticks([i for i in range(5)])
+    axs[i].set_yticks([i for i in range(5)])
+    axs[i].set_xticklabels(['a', 'e', 'i', 'o', 'u'])
+    axs[i].set_yticklabels(['a', 'e', 'i', 'o', 'u'])
     for x in range(5):
         for y in range(5):
             axs[i].text(y, x, conf_mat[i][x, y], ha="center", va="center", color="w")
 plt.tight_layout()
 plt.show()
-
-#score final del modelo de profundidad 3 usando los datos eval
-print("#########", "score final del tree con profundidad 3:", accuracy_score(y_eval, trees[2].predict(X_eval)), "#########")
