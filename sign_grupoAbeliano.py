@@ -589,3 +589,6 @@ for i in range(len(conf_mat)):
             axs[i].text(y, x, conf_mat[i][x, y], ha="center", va="center", color="w")
 plt.tight_layout()
 plt.show()
+
+#score final del modelo de profundidad 3 usando los datos eval
+print("#########", "score final del tree con profundidad 3:", accuracy_score(y_eval, trees[2].predict(X_eval)), "#########")
